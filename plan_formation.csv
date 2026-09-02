@@ -1,0 +1,22 @@
+jour,episode,fichier,titre,enseignement_min,exercices_min,commandes_introduites,fichiers_donnees
+1,1,01-pourquoi-la-ligne-de-commande.md,Pourquoi la ligne de commande en biologie,20,5,date; whoami; echo; wc,reads/ech01_R1.fastq.gz; tables/comptages.tsv
+1,2,02-naviguer-arborescence.md,Se déplacer dans l'arborescence,35,25,pwd; ls; ls -l -a -h -F -R; cd; chemins absolus et relatifs; . .. ~; tabulation; history,tout data/
+1,3,03-manipuler-fichiers.md,"Créer, copier, déplacer, supprimer",35,25,mkdir -p; touch; cp -r; mv; rm -i -r; rmdir; jokers * ? [] ; nommage de fichiers,reads/; tables/echantillons.tsv
+1,4,04-explorer-fichiers-texte.md,Lire un fichier sans l'ouvrir,40,25,cat; head -n; tail -n; less; wc -l -c -w; file; gzip; gunzip -c; du -h; cmp,genome/ref_toy.fa; reads/*.fastq.gz; variants/cohorte.vcf; journaux/pipeline.log
+2,5,05-formats-bioinformatiques.md,"Les formats de la bioinformatique, ligne par ligne",30,20,"lecture de FASTA, FASTQ, BED, GFF3, VCF, SAM, TSV; coordonnées 0-based et 1-based",tous les répertoires de data/
+2,6,06-redirections-et-tubes.md,Redirections et tubes,30,20,> ; >> ; < ; | ; 2> ; 2>&1 ; /dev/null ; tee ; sort ; uniq,genome/annotation.gff3; variants/cohorte.vcf; alignements/ech01.sam
+2,7,07-grep-et-motifs.md,Chercher un motif avec grep,30,25,grep -c -i -v -n -w -o -l -r -A -B -C -E; classes POSIX; ancres ^ $; quantificateurs,proteines/proteines.fa; journaux/pipeline.log; variants/cohorte.vcf; genome/annotation.gff3
+2,8,08-boite-a-outils-tabulaire.md,Découper et recoller des tables,30,25,cut -f -d -c; sort -k -n -r -u -t; uniq -c -d; tr -d -s; paste; join; comm,tables/comptages.tsv; tables/echantillons.tsv; regions/cibles.bed
+3,9,09-awk-premiers-pas.md,"awk : champs, motifs, conditions",30,25,awk '{print $1}'; $0 NF NR; -F; motifs et conditions; opérateurs; printf,genome/annotation.gff3; regions/cibles.bed; variants/cohorte.vcf
+3,10,10-awk-tableaux-et-groupes.md,awk : compter et calculer par groupe,30,25,BEGIN; END; variables; tableaux associatifs; for (k in t); split; sub gsub; length; substr,genome/annotation.gff3; alignements/ech01.sam; tables/comptages.tsv
+3,11,11-sed-reecriture.md,sed : réécrire du texte,25,15,sed 's///' ; drapeaux g et numérique; -n avec p; d; plages d'adresses; -E; groupes de capture,genome/annotation.gff3; tables/echantillons.tsv; proteines/proteines.fa
+3,12,12-atelier-recettes.md,Atelier : recettes combinées,15,45,"combinaisons de grep, cut, sort, uniq, awk, sed; conversion GFF3 vers BED",tous
+4,13,13-du-oneliner-au-script.md,Du one-liner au script,30,25,nano; shebang; chmod +x; ./script.sh; $1 $2 $@ $#; commentaires; exit; $?,reads/; tables/echantillons.tsv
+4,14,14-boucles-for.md,Traiter tous les échantillons avec une boucle,30,25,for … in … do … done; basename; dirname; construction de noms de sortie; echo pour tester,reads/*.fastq.gz
+4,15,15-tests-et-code-defensif.md,Tests et code défensif,30,20,if elif else fi; test [ ] ; -f -d -s -z -n; && || ; set -euo pipefail; exit 1; >&2,reads/ech04_R2.fastq.gz; tables/echantillons.tsv
+4,16,16-variables-et-quoting.md,"Variables, guillemets et substitution de commandes",30,20,"VAR=valeur; ""$VAR"" ; '$VAR' ; ${VAR} ; $(commande) ; ${VAR:-defaut} ; IFS; export",brut_desordre/; tables/echantillons.tsv
+5,17,17-fonctions-et-echantillons.md,Fonctions et pilotage par feuille d'échantillons,25,25,fonctions; variables locales; return; while read -r; IFS= ; boucle sur un TSV; case,tables/echantillons.tsv; reads/
+5,18,18-find-xargs-parallele.md,"find, xargs et parallélisation simple",25,20,find -name -type -size -maxdepth -newer -print0 -exec; xargs -0 -I -n -P; wait; &,brut_desordre/; reads/
+5,19,19-environnement-et-outils.md,Environnement de travail et installation d'outils,25,15,env; echo $PATH; export; which; type; ~/.bashrc; alias; ~/bin; tar; installation locale,aucun (démonstration)
+5,20,20-projet-final.md,Projet final : un pipeline Bash de bout en bout,10,55,synthèse de tout le programme,tous
+5,21,21-projet-propre-et-suite.md,"Garder un projet propre, et la suite",10,0,arborescence de projet; chmod a-w; README; renvoi vers la seconde formation,aucun

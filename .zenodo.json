@@ -1,0 +1,26 @@
+{
+  "title": "Bash pour la bioinformatique : formation de 20 heures en français",
+  "description": "<p>Formation de 20 heures \u00e0 la ligne de commande Bash pour la bioinformatique, en fran\u00e7ais, destin\u00e9e \u00e0 des d\u00e9butants complets. Vingt-un \u00e9pisodes r\u00e9partis sur cinq journ\u00e9es : navigation dans le syst\u00e8me de fichiers, manipulation de fichiers, formats bioinformatiques (FASTA, FASTQ, GFF3, BED, VCF, SAM), redirections et tubes, grep et expressions r\u00e9guli\u00e8res, awk, sed, \u00e9criture de scripts robustes, automatisation sur une feuille d'\u00e9chantillons. Construite avec The Carpentries Workbench. Jeu de donn\u00e9es synth\u00e9tique reproductible fourni.</p>",
+  "license": "cc-by-4.0",
+  "upload_type": "lesson",
+  "language": "fra",
+  "keywords": [
+    "bash",
+    "shell",
+    "ligne de commande",
+    "bioinformatique",
+    "formation",
+    "français",
+    "awk",
+    "The Carpentries",
+    "FAIR"
+  ],
+  "creators": [
+    {
+      "name": "Herlemont, Baptiste",
+      "affiliation": "VOTRE-LABORATOIRE",
+      "orcid": "0000-0000-0000-0000"
+    }
+  ],
+  "access_right": "open"
+}

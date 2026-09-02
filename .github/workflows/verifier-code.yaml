@@ -1,0 +1,48 @@
+name: "02 Vérifier les blocs de code des épisodes"
+
+# Contrôle propre à cette leçon (il ne fait pas partie du jeu de workflows
+# officiel du Workbench) : il régénère le jeu de données puis exécute tous les
+# blocs ```bash des épisodes pour s'assurer qu'aucune commande enseignée n'est
+# cassée.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'episodes/**'
+      - 'scripts/**'
+      - '.github/workflows/verifier-code.yaml'
+  pull_request:
+    paths:
+      - 'episodes/**'
+      - 'scripts/**'
+  workflow_dispatch:
+
+jobs:
+  verifier:
+    name: "Exécuter les blocs de code (${{ matrix.os }})"
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Les deux mondes d'outils : GNU sur Ubuntu, BSD sur macOS.
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: "Régénérer le jeu de données"
+        run: python3 scripts/generer_donnees.py
+
+      - name: "Exécuter les blocs de code des épisodes"
+        run: python3 scripts/verifier_episodes.py --strict
+
+      - name: "Publier le rapport"
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rapport-verification-${{ matrix.os }}
+          path: rapport_verification.md

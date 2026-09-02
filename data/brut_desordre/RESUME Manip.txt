@@ -1,0 +1,4 @@
+Notes de manipulation
+=====================
+Extraction ARN le 12 mars, kit standard.
+Attention : la lane 3 a du etre relancee.

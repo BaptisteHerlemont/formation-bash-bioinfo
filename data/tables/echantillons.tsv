@@ -1,0 +1,7 @@
+sample_id	condition	replicat	lane	fichier_R1	fichier_R2
+ech01	temoin	1	L001	ech01_R1.fastq.gz	ech01_R2.fastq.gz
+ech02	temoin	2	L001	ech02_R1.fastq.gz	ech02_R2.fastq.gz
+ech03	temoin	3	L002	ech03_R1.fastq.gz	ech03_R2.fastq.gz
+ech04	traite	1	L002	ech04_R1.fastq.gz	ech04_R2.fastq.gz
+ech05	traite	2	L003	ech05_R1.fastq.gz	ech05_R2.fastq.gz
+ech06	traite	3	L003	ech06_R1.fastq.gz	ech06_R2.fastq.gz

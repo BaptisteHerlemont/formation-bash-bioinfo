@@ -1,0 +1,16 @@
+# Sortie de construction du site
+site/*
+!site/README.md
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+renv/sandbox/
+
+# Archives et fichiers temporaires
+*.tar.gz
+!donnees-formation-bash.tar.gz
+bac_a_sable_verification/
+rapport_verification.md
+.DS_Store
+__pycache__/

@@ -1,0 +1,34 @@
+cff-version: 1.2.0
+title: "Bash pour la bioinformatique"
+message: >-
+  Si vous utilisez ce matériel pédagogique, merci de le citer en utilisant
+  les métadonnées de ce fichier.
+type: dataset
+abstract: >-
+  Formation de 20 heures à la ligne de commande Bash pour la bioinformatique,
+  en français, destinée à des débutants complets. Couvre la navigation dans le
+  système de fichiers, la manipulation de fichiers, les formats de données
+  bioinformatiques (FASTA, FASTQ, GFF3, BED, VCF, SAM), les redirections et les
+  tubes, grep et les expressions régulières, awk et sed, l'écriture de scripts
+  robustes et l'automatisation du traitement de séries d'échantillons.
+  Construite avec The Carpentries Workbench et accompagnée d'un jeu de données
+  synthétique reproductible.
+authors:
+  - family-names: "Herlemont"
+    given-names: "Baptiste"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+    affiliation: "VOTRE-LABORATOIRE"
+keywords:
+  - bash
+  - shell
+  - ligne de commande
+  - bioinformatique
+  - formation
+  - français
+  - awk
+  - The Carpentries
+license: CC-BY-4.0
+repository-code: "https://github.com/BaptisteHerlemont/formation-bash-bioinfo"
+url: "https://BaptisteHerlemont.github.io/formation-bash-bioinfo/"
+version: "0.1.0"
+date-released: "2024-09-17"

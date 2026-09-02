@@ -1,0 +1,24 @@
+2024-09-17 08:00:39 [INFO] ech01 controle_qualite - etape controle_qualite terminee en 39s
+2024-09-17 08:01:40 [INFO] ech01 nettoyage - etape nettoyage terminee en 61s
+2024-09-17 08:11:10 [INFO] ech01 alignement - etape alignement terminee en 570s
+2024-09-17 08:12:21 [INFO] ech01 comptage - etape comptage terminee en 71s
+2024-09-17 08:12:47 [INFO] ech02 controle_qualite - etape controle_qualite terminee en 26s
+2024-09-17 08:13:58 [INFO] ech02 nettoyage - etape nettoyage terminee en 71s
+2024-09-17 08:28:33 [INFO] ech02 alignement - etape alignement terminee en 875s
+2024-09-17 08:30:04 [INFO] ech02 comptage - etape comptage terminee en 91s
+2024-09-17 08:30:56 [INFO] ech03 controle_qualite - etape controle_qualite terminee en 52s
+2024-09-17 08:34:08 [INFO] ech03 nettoyage - etape nettoyage terminee en 192s
+2024-09-17 08:48:55 [INFO] ech03 alignement - etape alignement terminee en 887s
+2024-09-17 08:50:05 [INFO] ech03 comptage - etape comptage terminee en 70s
+2024-09-17 08:50:52 [ERROR] ech04 controle_qualite - fichier ech04_R2.fastq.gz tronque : bloc FASTQ incomplet
+2024-09-17 08:53:28 [INFO] ech04 nettoyage - etape nettoyage terminee en 156s
+2024-09-17 08:59:18 [INFO] ech04 alignement - etape alignement terminee en 350s
+2024-09-17 09:00:43 [INFO] ech04 comptage - etape comptage terminee en 85s
+2024-09-17 09:01:14 [INFO] ech05 controle_qualite - etape controle_qualite terminee en 31s
+2024-09-17 09:03:42 [WARNING] ech05 nettoyage - qualite moyenne inferieure au seuil (Q22), poursuite forcee
+2024-09-17 09:14:01 [INFO] ech05 alignement - etape alignement terminee en 619s
+2024-09-17 09:15:47 [INFO] ech05 comptage - etape comptage terminee en 106s
+2024-09-17 09:16:08 [INFO] ech06 controle_qualite - etape controle_qualite terminee en 21s
+2024-09-17 09:19:17 [INFO] ech06 nettoyage - etape nettoyage terminee en 189s
+2024-09-17 09:28:10 [INFO] ech06 alignement - etape alignement terminee en 533s
+2024-09-17 09:29:37 [INFO] ech06 comptage - etape comptage terminee en 87s
