@@ -485,8 +485,6 @@ champ » : c'est sa force (n'importe quel outil sait le lire) et sa faiblesse
 problème puisque le séparateur est la tabulation, mais devient un problème si
 le fichier mélange tabulations et espaces).
 
-::::::::::::::::::::::::::::::::::::::::::::::::::
-
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Compter les champs d'une ligne SAM

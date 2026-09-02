@@ -243,6 +243,52 @@ def decouper(sortie: str, executes: list[int]) -> dict[int, tuple[str, int]]:
     return res
 
 
+# --------------------------------------------------------------------------- #
+# Structure des blocs Workbench (« divs »)
+# --------------------------------------------------------------------------- #
+
+CLOTURE = re.compile(r"^(:{3,})\s*$")
+OUVERTURE = re.compile(r"^(:{3,})\s+(\S+)\s*$")
+
+
+def verifier_divs(chemin: Path) -> list[tuple[int, str]]:
+    """Vérifie l'appariement des blocs `:::` d'une page.
+
+    pegboard, le lecteur de markdown du Workbench, s'arrête net sur un
+    déséquilibre et rend un message peu lisible : il liste alors *toutes* les
+    clôtures du fichier. Autant attraper le défaut ici, avec sa ligne exacte.
+    Le nombre de deux-points n'a pas à correspondre entre ouverture et clôture
+    — le dépôt modèle des Carpentries lui-même n'y prête pas attention.
+    """
+    anomalies, pile = [], []
+    dans_code = False
+    for i, ligne in enumerate(chemin.read_text(encoding="utf-8").split("\n"), 1):
+        if ligne.lstrip().startswith("```"):
+            dans_code = not dans_code
+            continue
+        if dans_code:
+            continue
+        m = OUVERTURE.match(ligne)
+        if m:
+            pile.append((m.group(2), i))
+            continue
+        if CLOTURE.match(ligne):
+            if pile:
+                pile.pop()
+            else:
+                anomalies.append((i, "clôture `:::` sans bloc ouvert"))
+    for nom, i in pile:
+        anomalies.append((i, f"bloc `{nom}` jamais clos"))
+    return anomalies
+
+
+def annoter(chemin: str, ligne: int, message: str) -> None:
+    """Émet une annotation GitHub Actions, lisible dans la vue des différences."""
+    if os.environ.get("CI"):
+        msg = message.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A")
+        print(f"::error file={chemin},line={ligne}::{msg}")
+
+
 def verifier_episode(chemin: Path, corriger: bool) -> Resultat:
     texte = chemin.read_text(encoding="utf-8")
     blocs = analyser(texte)
@@ -269,6 +315,12 @@ def verifier_episode(chemin: Path, corriger: bool) -> Resultat:
             cwd=bac,
             capture_output=True,
             text=True,
+            # Entrée standard fermée : sans cela, une commande interactive
+            # (`rm -i`, `read`) attend une frappe et le contrôle expire au bout
+            # de DELAI secondes lorsqu'on le lance depuis un vrai terminal,
+            # alors qu'il passe sans broncher dans un tube ou en intégration
+            # continue. Le résultat doit être le même partout.
+            stdin=subprocess.DEVNULL,
             timeout=DELAI,
             env={**os.environ, "LC_ALL": "C", "LANG": "C", "COLUMNS": "80",
                  "HOME": str(maison)},
@@ -277,7 +329,7 @@ def verifier_episode(chemin: Path, corriger: bool) -> Resultat:
         # stable, sans quoi aucune sortie de `pwd` ne serait comparable.
         sortie = (proc.stdout + proc.stderr).replace(str(maison), MAISON_FICTIVE)
     except subprocess.TimeoutExpired:
-        r.echecs.append((0, "(épisode entier)", "", "", f"délai de {DELAI} s dépassé"))
+        r.echecs.append((0, "(épisode entier)", "", "", f"délai de {DELAI} s dépassé (boucle infinie ou attente d'entrée ?)"))
         shutil.rmtree(maison, ignore_errors=True)
         return r
 
@@ -384,17 +436,43 @@ def main() -> int:
         print("aucun épisode trouvé", file=sys.stderr)
         return 2
 
+    # 1. structure des blocs Workbench, sur toutes les pages du site
+    pages = sorted(EPISODES.glob("*.md"))
+    for rep in ("learners", "instructors", "profiles"):
+        pages += sorted((RACINE / rep).glob("*.md"))
+    if (RACINE / "index.md").is_file():
+        pages.append(RACINE / "index.md")
+    divs = []
+    for page in pages:
+        rel = page.relative_to(RACINE).as_posix()
+        for ligne, cause in verifier_divs(page):
+            divs.append((rel, ligne, cause))
+            annoter(rel, ligne, cause)
+    if divs:
+        print(f"structure des blocs : {len(divs)} anomalie(s)", file=sys.stderr)
+        for rel, ligne, cause in divs:
+            print(f"  {rel}:{ligne} — {cause}", file=sys.stderr)
+    else:
+        print(f"structure des blocs : {len(pages)} pages appariées  OK")
+
+    # 2. exécution des blocs de code des épisodes
     resultats = []
     for c in cibles:
         r = verifier_episode(c, args.corriger)
         resultats.append(r)
         etat = "OK" if not r.echecs else f"{len(r.echecs)} ÉCHEC(S)"
         print(f"{c.name:45s} {r.ok}/{r.executes} conformes  {etat}")
+        for ligne, code, attendu, obtenu, cause in r.echecs:
+            annoter(f"episodes/{c.name}", ligne, f"{cause}\n\ncommande : {code.strip()}")
 
-    (RACINE / args.sortie).write_text(rapport(resultats), encoding="utf-8")
+    txt = rapport(resultats)
+    if divs:
+        txt += "\n## Structure des blocs Workbench\n\n"
+        txt += "\n".join(f"- `{rel}` ligne {ligne} : {cause}" for rel, ligne, cause in divs) + "\n"
+    (RACINE / args.sortie).write_text(txt, encoding="utf-8")
     print(f"\nrapport : {args.sortie}")
 
-    total_echecs = sum(len(r.echecs) for r in resultats)
+    total_echecs = sum(len(r.echecs) for r in resultats) + len(divs)
     return 1 if (args.strict and total_echecs) else 0
 
 

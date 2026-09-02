@@ -88,6 +88,24 @@ portable. La matrice à deux systèmes du workflow `verifier-code.yaml` coûte
 30 secondes par push et remplace une classe entière signalant que « ça ne donne
 pas ça chez moi ».
 
+**« Build Full Site » en échec, avec dix avertissements « check for the
+corresponding open tag ».** Ne cherchez pas dix défauts : il n'y en a qu'un.
+`pegboard`, le lecteur de markdown du Workbench, compte les ouvertures et les
+clôtures de blocs `:::` ; au moindre déséquilibre il s'arrête et liste *toutes*
+les clôtures du fichier, en laissant deviner laquelle est en trop. Ici c'était
+une clôture orpheline dans l'épisode 05. Le vérificateur maison contrôle
+maintenant cet appariement sur les 30 pages du site avant d'exécuter le moindre
+bloc de code, et donne la ligne exacte.
+
+Deux remarques utiles pour la suite :
+
+- le nombre de deux-points n'a pas à correspondre entre l'ouverture et la
+  clôture d'un même bloc — le dépôt modèle des Carpentries ouvre à 37 et clôt à
+  48 ; seul le *nombre* d'ouvertures et de clôtures compte ;
+- le vérificateur émet désormais ses échecs sous forme d'annotations GitHub.
+  Elles apparaissent directement sur la ligne fautive dans la vue des
+  différences, ce qui évite de fouiller le journal d'exécution.
+
 ### Ce que contient `.github/workflows/`
 
 Le jeu officiel du Workbench, version `v1.0.2`, tel que produit par

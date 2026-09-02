@@ -334,3 +334,34 @@ bloc de code est incomplète.
   `~/bin`.
 - Pas de vi/vim comme éditeur imposé : `nano` pour les démonstrations, l'éditeur
   de son choix pour le travail.
+
+
+## Appariement des blocs `:::`
+
+Chaque bloc pédagogique ouvert (`challenge`, `solution`, `callout`, `caution`,
+`instructor`, `prereq`, `questions`, `objectives`, `keypoints`, `spoiler`,
+`discussion`) doit être clos par une ligne de deux-points seuls. Le nombre de
+deux-points est libre et n'a pas à correspondre entre l'ouverture et la
+clôture : seul l'équilibre du compte importe. Une clôture en trop, ou une
+ouverture jamais close, fait échouer la construction du site avec un message
+qui désigne toutes les clôtures du fichier au lieu de la seule fautive.
+
+`python3 scripts/verifier_episodes.py` contrôle cet appariement sur toutes les
+pages du site — épisodes, `index.md`, `learners/`, `instructors/`, `profiles/` —
+avant d'exécuter les blocs de code, et donne le fichier et la ligne. Lancez-le
+avant chaque push.
+
+
+## Commandes interactives
+
+Une commande qui attend une frappe — `rm -i`, `cp -i`, `read`, un éditeur —
+doit porter le marqueur `<!-- verif: ignore -->`, placé **avant** son bloc.
+Placé après, le marqueur s'applique au bloc suivant : le bloc interactif est
+alors exécuté pour de bon.
+
+Le vérificateur ferme l'entrée standard du sous-shell (`/dev/null`), si bien
+qu'une commande interactive oubliée ne bloque plus le contrôle. Sans cette
+précaution, le même dépôt passait en intégration continue et restait figé
+jusqu'au délai de 180 s lorsqu'on lançait le contrôle depuis un vrai terminal —
+la panne la plus déroutante possible, puisqu'elle ne dépend que de la présence
+d'un terminal.

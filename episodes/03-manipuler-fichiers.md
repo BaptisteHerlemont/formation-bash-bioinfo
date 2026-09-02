@@ -356,9 +356,6 @@ touch tmp/a_supprimer.txt
 rm -i tmp/a_supprimer.txt
 ```
 
-```output
-```
-
 Le terminal attend une réponse (`y` pour confirmer, `n` pour annuler) : cette
 interaction ne peut pas être rejouée automatiquement, c'est pourquoi ce bloc
 n'est pas vérifié. Tapez `y` puis Entrée dans votre propre terminal pour
@@ -838,16 +835,13 @@ echantillons.tsv
 echantillons_travail.tsv
 ```
 
-<!-- verif: ordre-libre -->
+<!-- verif: ignore -->
 
 ```bash
 rm -i "tmp/Echantillon 01 - Run mars.fastq"
 ```
 
-```error
-```
-
-<!-- verif: ignore -->
+Comme plus haut, `rm -i` attend votre confirmation : tapez `y` puis Entrée.
 
 Les guillemets sont indispensables ici : sans eux, le shell découperait le
 nom aux espaces et `rm` chercherait à supprimer plusieurs fichiers dont aucun
