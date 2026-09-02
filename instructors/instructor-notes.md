@@ -161,3 +161,19 @@ Le second script réexécute tous les blocs de code des épisodes et échoue si
 l'un d'eux ne produit plus le résultat annoncé. Lancez-le sur votre propre
 machine avant chaque session : c'est la meilleure garantie contre la
 démonstration qui tombe à plat.
+
+
+## Portabilité BSD / GNU
+
+Les sorties montrées dans les épisodes ont été vérifiées sur les deux familles
+d'outils, macOS (BSD) et GNU/Linux, par le workflow `verifier-code.yaml` qui
+rejoue tous les blocs sur les deux systèmes à chaque contribution. Quatre
+divergences réelles ont été trouvées et corrigées de cette façon : `\t` dans un
+motif `grep -E`, l'ordre de parcours d'un tableau associatif en awk, l'alignement
+en colonnes de `wc -l`, et le chemin rendu par `command -v`.
+
+Conséquence pour vous en salle : si un apprenant obtient une sortie légèrement
+différente de celle projetée, la première question est celle de son système, et
+la réponse se trouve en général dans l'encadré de portabilité de l'épisode en
+cours. N'ajoutez jamais une sortie observée sur votre seule machine dans un
+épisode sans faire passer le contrôle sur les deux systèmes.

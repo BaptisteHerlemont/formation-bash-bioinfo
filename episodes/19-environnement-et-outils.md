@@ -143,6 +143,7 @@ pensé pour être lu par un script plutôt que par un œil humain — c'est celu
 que vous utiliserez dans vos propres scripts pour vérifier qu'un outil est
 disponible avant de l'utiliser.
 
+<!-- verif: exec-seulement -->
 ```bash
 command -v grep
 ```
@@ -150,6 +151,11 @@ command -v grep
 ```output
 /usr/bin/grep
 ```
+
+Ce chemin dépend de votre machine : `/usr/bin/grep` sur une installation
+standard, mais `/opt/homebrew/bin/grep` ou un chemin dans un environnement
+conda si vous avez installé une autre version — et c'est précisément
+l'information que `command -v` sert à révéler.
 
 ```bash
 command -v cd

@@ -384,13 +384,19 @@ colonne 3 (`RNAME`).
 ## Solution
 
 ```bash
-awk '!/^@/ && $3 != "*" { compte[$3]++ } END { for (chrom in compte) { print chrom, compte[chrom] } }' data/alignements/ech01.sam
+awk '!/^@/ && $3 != "*" { compte[$3]++ } END { for (chrom in compte) { print chrom, compte[chrom] } }' data/alignements/ech01.sam | sort
 ```
 
 ```output
-chrM 10
 chr1 267
+chrM 10
 ```
+
+Le `| sort` final n'est pas cosmétique : l'ordre dans lequel `for (clé in
+tableau)` parcourt un tableau associatif n'est **pas** spécifié par le langage,
+et il diffère effectivement entre l'`awk` de macOS et celui de GNU/Linux. Toute
+sortie destinée à être comparée, archivée ou relue par un collègue doit donc
+passer par un tri explicite.
 
 Toutes les lectures alignées de cet échantillon le sont sur `chr1` : c'est
 cohérent avec le fait que `chrM`, le contig mitochondrial, est beaucoup plus
@@ -834,7 +840,15 @@ awk '$3 == "gene" {
         }
     }
 }
-END { for (b in compte) { print b, compte[b] } }' data/genome/annotation.gff3
+END { for (b in compte) { print b, compte[b] } }' data/genome/annotation.gff3 | sort
+```
+
+```output
+biotype=lncRNA 17
+biotype=protein_coding 90
+biotype=pseudogene 7
+biotype=rRNA 4
+biotype=tRNA 10
 ```
 
 ```output

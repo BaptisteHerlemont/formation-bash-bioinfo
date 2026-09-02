@@ -588,8 +588,21 @@ lignes de données (pas les lignes d'en-tête `@`) où le troisième champ vaut
 ## Solution
 
 ```bash
-grep -v '^@' data/alignements/ech01.sam | grep -c -E '^[^\t]+\t[^\t]+\t\*\t'
+tabulation=$(printf '\t')
+grep -v '^@' data/alignements/ech01.sam |
+    grep -c -E "^[^$tabulation]+$tabulation[^$tabulation]+$tabulation\*$tabulation"
 ```
+
+```output
+23
+```
+
+Attention à un piège de portabilité : `\t` dans un motif n'est **pas** reconnu
+par toutes les implémentations de `grep`. Celle de macOS l'interprète comme une
+tabulation, celle de GNU/Linux le lit comme la lettre `t`, et le motif ne
+correspond alors à rien. D'où le détour par `tabulation=$(printf '\t')`, qui
+place une vraie tabulation dans la variable : le motif contient dès lors le
+caractère lui-même, et se comporte de la même façon partout.
 
 `grep -v '^@'` élimine les lignes d'en-tête, qui commencent toutes par `@`.
 Le second motif décompose la ligne en champs séparés par des tabulations :

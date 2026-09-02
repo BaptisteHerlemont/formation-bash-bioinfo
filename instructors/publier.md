@@ -51,6 +51,43 @@ hypothèse. Si l'étape de déploiement se plaint de droits d'écriture, vérifi
 Cette leçon ne contient aucun code R exécuté à la construction : rien d'autre à
 configurer, ni cache de paquets, ni variable de dépôt.
 
+### Si la première construction échoue
+
+Deux échecs sont attendus au premier push, et tous deux sont déjà corrigés dans
+ce dépôt. Ils sont documentés ici parce qu'ils reviendront le jour où vous
+créerez une autre leçon.
+
+**« Record container version used » en échec, « Build Full Site » sauté.** Avant
+de construire, le workflow veut inscrire dans `.github/workbench-docker-version.txt`
+la version du conteneur utilisée — en ouvrant une *pull request*, ce que les
+réglages par défaut d'un dépôt neuf interdisent. Deux remèdes, à appliquer
+plutôt tous les deux :
+
+- créer le fichier soi-même, ce qui rend l'étape inutile (c'est fait ici :
+  il contient `v0.2.8`) ;
+- **Settings → Actions → General → Workflow permissions** : cocher *Read and
+  write permissions* **et** *Allow GitHub Actions to create and approve pull
+  requests*. Sans cela, l'étape échouera de nouveau à chaque montée de version
+  du conteneur.
+
+**Vérification des blocs de code en échec sur `ubuntu-latest`, réussie sur
+`macos-latest`.** C'est le cas intéressant : le contrôle tourne sur les deux
+systèmes précisément pour attraper les divergences entre outils BSD et GNU, et
+il en a trouvé quatre au premier essai. Elles sont corrigées, et chacune est
+devenue une remarque de portabilité dans l'épisode concerné :
+
+| Épisode | Divergence | Correction |
+|---|---|---|
+| 07 | `\t` dans un motif `grep -E` : tabulation sur macOS, lettre `t` sur GNU | une vraie tabulation via `$(printf '\t')` |
+| 10 (deux fois) | l'ordre de `for (clé in tableau)` en awk n'est pas spécifié | `| sort` explicite en sortie |
+| 15 | `wc -l` aligne son résultat en colonnes sur macOS, pas sur GNU | `| tr -d ' '` avant usage |
+| 19 | le chemin rendu par `command -v` dépend de la machine | bloc exécuté sans comparaison de sortie |
+
+La morale, à retenir pour la suite : ne jamais valider une leçon sur son seul
+portable. La matrice à deux systèmes du workflow `verifier-code.yaml` coûte
+30 secondes par push et remplace une classe entière signalant que « ça ne donne
+pas ça chez moi ».
+
 ### Ce que contient `.github/workflows/`
 
 Le jeu officiel du Workbench, version `v1.0.2`, tel que produit par

@@ -821,7 +821,7 @@ then
     exit 1
 fi
 
-nb_lignes=$(gunzip -c "$fichier" | wc -l)
+nb_lignes=$(gunzip -c "$fichier" | wc -l | tr -d ' ')
 reste=$((nb_lignes % 4))
 
 if [ "$reste" -ne 0 ]
@@ -860,7 +860,7 @@ then
     exit 1
 fi
 
-nb_lignes=$(gunzip -c "$fichier" | wc -l)
+nb_lignes=$(gunzip -c "$fichier" | wc -l | tr -d ' ')
 reste=$((nb_lignes % 4))
 
 if [ "$reste" -ne 0 ]
@@ -891,8 +891,14 @@ chmod +x scripts/verifier_fastq.sh
 ```
 
 ```output
-data/reads/ech01_R1.fastq.gz est valide (    2000 lignes, 500 lectures)
+data/reads/ech01_R1.fastq.gz est valide (2000 lignes, 500 lectures)
 ```
+
+Le `| tr -d ' '` après `wc -l` mérite un mot. Le `wc` de macOS aligne son
+résultat sur une largeur fixe et renvoie donc `    2000`, espaces compris,
+alors que celui de GNU/Linux renvoie `2000` tout court. Sans ce nettoyage, le
+message du script porterait ces espaces sur l'une des deux plateformes — et,
+plus grave, la comparaison arithmétique qui suit deviendrait fragile.
 
 <!-- verif: exec-seulement -->
 ```bash
@@ -928,8 +934,8 @@ proprement à ce script), appelez `scripts/verifier_fastq.sh` sur
 ```
 
 ```error
-data/reads/ech02_R2.fastq.gz est valide (    2000 lignes, 500 lectures)
-data/reads/ech05_R2.fastq.gz est valide (    2000 lignes, 500 lectures)
+data/reads/ech02_R2.fastq.gz est valide (2000 lignes, 500 lectures)
+data/reads/ech05_R2.fastq.gz est valide (2000 lignes, 500 lectures)
 ```
 
 Les deux fichiers ont un nombre de lignes multiple de 4 : le script les
