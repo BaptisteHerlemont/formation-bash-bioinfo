@@ -87,7 +87,7 @@ commande en `code`.
 
 Syntaxe exacte d'un défi, à recopier telle quelle :
 
-```markdown
+````markdown
 :::::::::::::::::::::::::::::::::::::::  challenge
 
 ## Combien de lectures dans l'échantillon 1 ?
@@ -114,7 +114,7 @@ lignes reçues.
 :::::::::::::::::::::::::
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::
-```
+````
 
 La longueur des `:` n'a pas d'importance pour Pandoc (minimum trois), mais
 gardez ces longueurs-là : elles rendent l'imbrication lisible dans l'éditeur.

@@ -251,6 +251,17 @@ CLOTURE = re.compile(r"^(:{3,})\s*$")
 OUVERTURE = re.compile(r"^(:{3,})\s+(\S+)\s*$")
 
 
+def page_lisible(chemin: Path):
+    """Écarte les fichiers annexes macOS (`._page.md`, métadonnées AppleDouble)
+    et signale une page qui ne serait pas en UTF-8."""
+    if chemin.name.startswith("._"):
+        return None
+    try:
+        return chemin.read_text(encoding="utf-8")
+    except UnicodeDecodeError:
+        return False
+
+
 def verifier_divs(chemin: Path) -> list[tuple[int, str]]:
     """Vérifie l'appariement des blocs `:::` d'une page.
 
@@ -261,12 +272,32 @@ def verifier_divs(chemin: Path) -> list[tuple[int, str]]:
     — le dépôt modèle des Carpentries lui-même n'y prête pas attention.
     """
     anomalies, pile = [], []
-    dans_code = False
-    for i, ligne in enumerate(chemin.read_text(encoding="utf-8").split("\n"), 1):
-        if ligne.lstrip().startswith("```"):
-            dans_code = not dans_code
+    debut_code = 0
+    cloture_code = None          # longueur et caractère de la clôture attendue
+    contenu = page_lisible(chemin)
+    if contenu is None:
+        return []
+    if contenu is False:
+        return [(1, "page illisible : ce fichier n'est pas en UTF-8")]
+    for i, ligne in enumerate(contenu.split("\n"), 1):
+        nue = ligne.lstrip()
+        m_code = re.match(r"(`{3,}|~{3,})\s*(\S*)", nue)
+        if cloture_code is not None:
+            # Un bloc de code ne se ferme que par une clôture au moins aussi
+            # longue et du même caractère : c'est ainsi qu'on imbrique un
+            # exemple de markdown dans un bloc de code, et l'oublier fait
+            # ressortir les `:::` de l'exemple comme de vrais blocs.
+            # Une clôture ne porte jamais d'étiquette de langage : `​``output`
+            # ouvre un bloc, il n'en ferme aucun (règle CommonMark, et c'est
+            # elle qui décide de ce que voit le lecteur du Workbench).
+            if (m_code and not m_code.group(2)
+                    and m_code.group(1)[0] == cloture_code[0]
+                    and len(m_code.group(1)) >= cloture_code[1]):
+                cloture_code = None
             continue
-        if dans_code:
+        if m_code:
+            cloture_code = (m_code.group(1)[0], len(m_code.group(1)))
+            debut_code = i
             continue
         m = OUVERTURE.match(ligne)
         if m:
@@ -279,6 +310,9 @@ def verifier_divs(chemin: Path) -> list[tuple[int, str]]:
                 anomalies.append((i, "clôture `:::` sans bloc ouvert"))
     for nom, i in pile:
         anomalies.append((i, f"bloc `{nom}` jamais clos"))
+    if cloture_code is not None:
+        anomalies.append((debut_code, "bloc de code jamais clos — le reste de "
+                          "la page est avalé par ce bloc"))
     return anomalies
 
 

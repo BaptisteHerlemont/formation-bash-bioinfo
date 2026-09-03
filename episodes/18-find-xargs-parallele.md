@@ -164,16 +164,19 @@ résultat, et comparons :
 ```bash
 touch tmp/repere
 gunzip -c data/reads/ech01_R1.fastq.gz | wc -l > resultats/compte_ech01.txt
-find resultats -newer tmp/repere
+find resultats -type f -newer tmp/repere
 ```
 
 ```output
-resultats
 resultats/compte_ech01.txt
 ```
 
-`resultats/compte_ech01.txt` a été créé après `tmp/repere` : `find` le
-signale. C'est ainsi qu'on repère, dans un répertoire de résultats qui
+`resultats/compte_ech01.txt` a été écrit après `tmp/repere` : `find` le
+signale. Le `-type f` n'est pas décoratif ici : sans lui, `find` examinerait
+aussi le répertoire `resultats` lui-même, dont la date de modification change
+quand son contenu change — et la liste obtenue dépendrait alors de l'état
+antérieur du répertoire. Restreindre aux fichiers rend la réponse
+prévisible. C'est ainsi qu'on repère, dans un répertoire de résultats qui
 grossit, ce qui vient d'être produit par le dernier lancement d'un script.
 
 ### Combiner les critères

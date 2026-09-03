@@ -14,3 +14,7 @@ bac_a_sable_verification/
 rapport_verification.md
 .DS_Store
 __pycache__/
+
+# métadonnées macOS
+._*
+.DS_Store
