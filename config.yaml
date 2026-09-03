@@ -1,0 +1,93 @@
+#------------------------------------------------------------
+# Configuration de la leçon — The Carpentries Workbench (sandpaper)
+#------------------------------------------------------------
+
+# Programme concerné : incubator = The Carpentries Incubator
+carpentry: 'incubator'
+
+# Sous-titre affiché sous le titre, dans l'entête du site
+carpentry_description: 'Formation en français, 20 heures'
+
+# Titre affiché sur toutes les pages
+title: 'Bash pour la bioinformatique'
+
+# Date de création de la leçon (AAAA-MM-JJ)
+created: '2024-09-17'
+
+# Mots-clés, séparés par des virgules
+keywords: 'bash, shell, ligne de commande, bioinformatique, français, awk, formats de fichiers'
+
+# Étape du cycle de vie : pre-alpha, alpha, beta, stable
+life_cycle: 'pre-alpha'
+
+# Licence du matériel pédagogique
+license: 'CC-BY 4.0'
+
+# Dépôt source de la leçon
+source: 'https://github.com/BaptisteHerlemont/formation-bash-bioinfo'
+
+# Branche par défaut
+branch: 'main'
+
+# Contact en cas de problème
+contact: 'baptiste.herlemont@orange.fr'
+
+# Langue de la leçon : active les traductions françaises des éléments
+# d'interface fournies par sandpaper (Objectifs, Défi, Solution, etc.)
+lang: fr
+
+#------------------------------------------------------------
+# Navigation
+#------------------------------------------------------------
+
+# Ordre des épisodes. La numérotation des fichiers suit les cinq journées :
+#   01-04  Jour 1 — Prendre pied dans le shell
+#   05-08  Jour 2 — Formats bioinformatiques et flux de texte
+#   09-12  Jour 3 — awk et sed
+#   13-16  Jour 4 — Écrire des scripts
+#   17-21  Jour 5 — Autonomie, projet, bonnes pratiques
+episodes:
+- 01-pourquoi-la-ligne-de-commande.md
+- 02-naviguer-arborescence.md
+- 03-manipuler-fichiers.md
+- 04-explorer-fichiers-texte.md
+- 05-formats-bioinformatiques.md
+- 06-redirections-et-tubes.md
+- 07-grep-et-motifs.md
+- 08-boite-a-outils-tabulaire.md
+- 09-awk-premiers-pas.md
+- 10-awk-tableaux-et-groupes.md
+- 11-sed-reecriture.md
+- 12-atelier-recettes.md
+- 13-du-oneliner-au-script.md
+- 14-boucles-for.md
+- 15-tests-et-code-defensif.md
+- 16-variables-et-quoting.md
+- 17-fonctions-et-echantillons.md
+- 18-find-xargs-parallele.md
+- 19-environnement-et-outils.md
+- 20-projet-final.md
+- 21-projet-propre-et-suite.md
+
+# Pages « Pour les apprenants »
+learners:
+- setup.md
+- aide-memoire.md
+- depannage.md
+
+# Pages « Pour les formateurs »
+instructors:
+- instructor-notes.md
+- guide-de-style.md
+- fiche-de-faits.md
+- publier.md
+
+# Profils d'apprenants
+profiles:
+- learner-profiles.md
+
+#------------------------------------------------------------
+# Personnalisation
+#------------------------------------------------------------
+# Décommenter pour activer le suivi Matomo des Carpentries
+# analytics: carpentries
