@@ -5,12 +5,10 @@ Leçon [Carpentries Workbench](https://carpentries.github.io/workbench/) destin�
 au bout de cinq demi-journées, traiter leurs propres fichiers de séquençage en
 ligne de commande sans dépendre de quiconque.
 
-- **Format** : 5 demi-journées de 4 h (17 h 30 de contenu, 20 h de présence
-  pauses comprises).
+- **Format** : 5 demi-journées de 4 h 
 - **Public** : débutants complets. Aucun prérequis, aucun accès serveur : tout
   se fait sur le portable de l'apprenant, sous Linux, macOS ou Windows (WSL 2).
-- **Langue** : français. Les noms de commandes, d'options et de formats restent
-  en anglais, comme dans la vraie vie.
+- **Langue** : français
 - **Contenu** : navigation, manipulation de fichiers, formats de la
   bioinformatique (FASTA, FASTQ, GFF3, BED, VCF, SAM, TSV), redirections et
   tubes, `grep`, `cut`/`sort`/`uniq`/`join`/`paste`, `awk`, `sed`, scripts,
