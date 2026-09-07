@@ -10,14 +10,11 @@ abstract: >-
   système de fichiers, la manipulation de fichiers, les formats de données
   bioinformatiques (FASTA, FASTQ, GFF3, BED, VCF, SAM), les redirections et les
   tubes, grep et les expressions régulières, awk et sed, l'écriture de scripts
-  robustes et l'automatisation du traitement de séries d'échantillons.
-  Construite avec The Carpentries Workbench et accompagnée d'un jeu de données
+  robustes et l'automatisation du traitement de séries d'échantillons accompagnée d'un jeu de données
   synthétique reproductible.
 authors:
   - family-names: "Herlemont"
     given-names: "Baptiste"
-    orcid: "https://orcid.org/0000-0000-0000-0000"
-    affiliation: "VOTRE-LABORATOIRE"
 keywords:
   - bash
   - shell
@@ -30,5 +27,5 @@ keywords:
 license: CC-BY-4.0
 repository-code: "https://github.com/BaptisteHerlemont/formation-bash-bioinfo"
 url: "https://BaptisteHerlemont.github.io/formation-bash-bioinfo/"
-version: "0.1.0"
-date-released: "2024-09-17"
+version: "1.0.0"
+date-released: "2026-09-07"
