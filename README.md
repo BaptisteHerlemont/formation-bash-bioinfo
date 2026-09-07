@@ -51,31 +51,3 @@ python3 scripts/generer_donnees.py
 bash scripts/preparer_archive_donnees.sh   # produit donnees-formation-bash.tar.gz
 ```
 
-## Tous les blocs de code sont testés
-
-Chaque bloc `bash` des épisodes est réellement exécuté, dans l'ordre, dans un bac
-à sable neuf ne contenant que `data/`, et sa sortie est comparée au bloc
-`output` qui le suit dans la leçon :
-
-```bash
-python3 scripts/verifier_episodes.py --strict
-```
-
-C'est ce que fait la CI à chaque *pull request* (`.github/workflows/verifier-code.yaml`).
-Un apprenant qui recopie une commande de la leçon obtient donc la sortie
-annoncée. Les conventions de marquage (`<!-- verif: ... -->`) sont décrites dans
-`instructors/guide-de-style.md`.
-
-## Construire le site localement
-
-```r
-install.packages("sandpaper", repos = c("https://carpentries.r-universe.dev/",
-                                        getOption("repos")))
-sandpaper::serve()
-```
-
-Publication : `sh scripts/preparer_publication.sh COMPTE COURRIEL "Prénom Nom"`,
-puis `git push`. Le workflow *01 Maintain: Build and Deploy Site* pousse le site
-dans la branche orpheline `gh-pages`, que GitHub Pages doit servir
-(**Settings → Pages → Deploy from a branch → `gh-pages` / root**). Marche à
-suivre complète dans `instructors/publier.md`.
