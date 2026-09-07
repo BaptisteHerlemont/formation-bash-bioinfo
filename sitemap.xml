@@ -76,6 +76,9 @@
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/aide-memoire.html</loc>
   </url>
   <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/aio.html</loc>
+  </url>
+  <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/citation.html</loc>
   </url>
   <url>
@@ -86,6 +89,9 @@
   </url>
   <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/guide-de-style.html</loc>
+  </url>
+  <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/images.html</loc>
   </url>
   <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/index.html</loc>
@@ -166,6 +172,9 @@
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/aide-memoire.html</loc>
   </url>
   <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/aio.html</loc>
+  </url>
+  <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/citation.html</loc>
   </url>
   <url>
@@ -178,13 +187,28 @@
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/guide-de-style.html</loc>
   </url>
   <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/images.html</loc>
+  </url>
+  <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/index.html</loc>
+  </url>
+  <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/key-points.html</loc>
   </url>
   <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/profiles.html</loc>
   </url>
   <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor/publier.html</loc>
+  </url>
+  <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/instructor-notes.html</loc>
+  </url>
+  <url>
+    <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/key-points.html</loc>
   </url>
   <url>
     <loc>https://BaptisteHerlemont.github.io/formation-bash-bioinfo/profiles.html</loc>

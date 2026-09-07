@@ -32,4 +32,4 @@
 "learners/aide-memoire.md" "0c011f2ad6320bb4b28297798f60fb74" "site/built/aide-memoire.md" "2026-09-03"
 "learners/depannage.md" "92b4c3c479bbdd539220539e5f8de111" "site/built/depannage.md" "2026-09-03"
 "profiles/learner-profiles.md" "ebc236342b8d003527fbff3b797ca7ac" "site/built/learner-profiles.md" "2026-09-03"
-"renv/profiles/lesson-requirements/renv.lock" NA "site/built/renv.lock" "2026-09-03"
+"renv/profiles/lesson-requirements/renv.lock" NA "site/built/renv.lock" "2026-09-07"
