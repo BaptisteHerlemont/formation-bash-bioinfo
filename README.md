@@ -17,7 +17,6 @@ ligne de commande sans dépendre de quiconque.
   boucles, tests, fonctions, `find`/`xargs`, environnement de travail, puis un
   projet final complet.
 
-![Durée de chaque épisode et part du temps passée en exercices](episodes/fig/progression-formation.png)
 
 Cette leçon est le **premier volet** d'un ensemble de deux. Le second (conteneurs,
 gestionnaires de flux de travail, Git, travail sur serveur, rapports
